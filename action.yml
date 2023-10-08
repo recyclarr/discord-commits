@@ -17,6 +17,11 @@ inputs:
     description: "The name of of a premade template."
   last-commit-only:
     description: "Boolean - only show the last commit."
+  commit-filters:
+    description: >-
+      One or more regular expressions used to filter commits. As long as at least one regex matches,
+      the commit is allowed through. The match is performed against only the first line (subject) of
+      the commit message.
 
 runs:
   using: "node16"
