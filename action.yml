@@ -1,11 +1,11 @@
-name: "Discord Commits"
-description: "Send commit summary to Discord using custom templates"
+name: Discord Commits
+description: Send commit summary to Discord using custom templates
 branding:
-  icon: "bell"
-  color: "purple"
+  icon: bell
+  color: purple
 inputs:
   webhook:
-    description: "discord webhook url without /github"
+    description: discord webhook url without /github
     required: true
   message:
     description: "A general message that is displayed for all commits. Defaults to the repo name."
@@ -24,5 +24,5 @@ inputs:
       the commit message.
 
 runs:
-  using: "node16"
-  main: "discord-commits/index.mjs"
+  using: node16
+  main: dist/index.mjs
