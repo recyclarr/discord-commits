@@ -18,48 +18,57 @@ const DATA = {
   github: { ...github },
 }
 
-github.context.payload.commits ??= defaultPayload
+async function main() {
+  github.context.payload.commits ??= defaultPayload
 
-if (lastCommitOnly) {
-  github.context.payload.commits = github.context.payload.commits.slice(-1)
-}
+  if (lastCommitOnly) {
+    github.context.payload.commits = github.context.payload.commits.slice(-1)
+  }
 
-if (commitFilters.length !== 0) {
-  console.log(`Filters: ${commitFilters}`)
-  github.context.payload.commits = github.context.payload.commits.filter(commit => {
-    const messageSubject = commit.message.split('\n')[0];
-    return commitFilters.some(x => x.test(messageSubject))
+  if (commitFilters.length !== 0) {
+    console.log(`Filters: ${commitFilters}`)
+    github.context.payload.commits = github.context.payload.commits.filter(commit => {
+      const messageSubject = commit.message.split('\n')[0];
+      return commitFilters.some(x => x.test(messageSubject))
+    })
+  }
+
+  // If commits are empty, bail out and do nothing.
+  if (github.context.payload.commits.length === 0) {
+    return
+  }
+
+  let embeds = github.context.payload.commits.map(commit => {
+    return parseTemplate({
+      ...DATA,
+      commit: createCommit(commit),
+    }, JSON.parse(embed));
   })
+
+  embeds = embeds.concat(extraEmbeds.map(embed => parseTemplate(DATA, embed)))
+
+  const payload = {
+    content: parseTemplate(DATA, message),
+    embeds: embeds.filter(x => x)
+  }
+
+  try {
+    await fetch(`${webhook}?wait=true`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "X-GitHub-Event": "push",
+      },
+      body: JSON.stringify(payload)
+    })
+  } catch (err) {
+    console.error(err)
+    core.error(err)
+    core.setFailed(
+      "Message :",
+      err.response ? err.response.data : err.message
+    );
+  }
 }
 
-let embeds = github.context.payload.commits.map(commit => {
-  return parseTemplate({
-    ...DATA,
-    commit: createCommit(commit),
-  }, JSON.parse(embed));
-})
-
-embeds = embeds.concat(extraEmbeds.map(embed => parseTemplate(DATA, embed)))
-
-const payload = {
-  content: parseTemplate(DATA, message),
-  embeds: embeds.filter(x => x)
-}
-
-try {
-  await fetch(`${webhook}?wait=true`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-      "X-GitHub-Event": "push",
-    },
-    body: JSON.stringify(payload)
-  })
-} catch (err) {
-  console.error(err)
-  core.error(err)
-  core.setFailed(
-    "Message :",
-    err.response ? err.response.data : err.message
-  );
-}
+await main()
