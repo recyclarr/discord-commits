@@ -7,7 +7,68 @@
   "forced": false,
   "base_ref": null,
   "compare": "https://github.com/Codertocat/Hello-World/compare/6113728f27ae...000000000000",
-  "commits": [],
+  "commits": [
+    {
+      "sha": "80236a2052b620277bb2fda450366180743b2e73",
+      "author": {
+        "email": "git@rdailey.me",
+        "name": "Robert Dailey"
+      },
+      "message": "chore: Use text=auto in gitattributes",
+      "distinct": true,
+      "url": "https://api.github.com/repos/recyclarr/discord-commits/commits/80236a2052b620277bb2fda450366180743b2e73"
+    },
+    {
+      "sha": "363182cf5e82d7ddef332a1d0d85e0f63936654b",
+      "author": {
+        "email": "git@rdailey.me",
+        "name": "Robert Dailey"
+      },
+      "message": "chore: Remove node_modules\n\nGithub Actions docs states it should not be checked in. See here:",
+      "distinct": true,
+      "url": "https://api.github.com/repos/recyclarr/discord-commits/commits/363182cf5e82d7ddef332a1d0d85e0f63936654b"
+    },
+    {
+      "sha": "52c6299c521f6c8d3806ab3eb3d8b2e8aa52193a",
+      "author": {
+        "email": "git@rdailey.me",
+        "name": "Robert Dailey"
+      },
+      "message": "chore: Use node template for gitignore",
+      "distinct": true,
+      "url": "https://api.github.com/repos/recyclarr/discord-commits/commits/52c6299c521f6c8d3806ab3eb3d8b2e8aa52193a"
+    },
+    {
+      "sha": "697f868d55508fca1baea3f12658ad826e9bcf72",
+      "author": {
+        "email": "git@rdailey.me",
+        "name": "Robert Dailey"
+      },
+      "message": "build: Remove package-lock.json\n\nWe use Yarn instead",
+      "distinct": true,
+      "url": "https://api.github.com/repos/recyclarr/discord-commits/commits/697f868d55508fca1baea3f12658ad826e9bcf72"
+    },
+    {
+      "sha": "9e756ff7dec2808bca3b7326704f711ff1dfd7de",
+      "author": {
+        "email": "git@rdailey.me",
+        "name": "Robert Dailey"
+      },
+      "message": "build: Update yarn.lock",
+      "distinct": true,
+      "url": "https://api.github.com/repos/recyclarr/discord-commits/commits/9e756ff7dec2808bca3b7326704f711ff1dfd7de"
+    },
+    {
+      "sha": "0bc966295eb66536383d4dd1148970cc36e909f4",
+      "author": {
+        "email": "git@rdailey.me",
+        "name": "Robert Dailey"
+      },
+      "message": "test: Fix up main.yml\n\n- Use yarn instead of NPM\n- Update version of some actions",
+      "distinct": true,
+      "url": "https://api.github.com/repos/recyclarr/discord-commits/commits/0bc966295eb66536383d4dd1148970cc36e909f4"
+    }
+  ],
   "head_commit": null,
   "repository": {
     "id": 186853002,

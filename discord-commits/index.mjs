@@ -6,13 +6,12 @@ import defaultPayload from "./defaults/payload-commits.js"
 
 const templateName = core.getInput("template") || "plain";
 const template = await loadTemplate(templateName)
-
 const message = core.getInput("message") || template.message
 const webhook = core.getInput("webhook");
 const lastCommitOnly = stringToBoolean(core.getInput("last-commit-only"))
 const extraEmbeds = stringToBoolean(core.getInput("include-extras")) ? template.extras || [] : []
-
 const embed = stringOrFalse(core.getInput("embed")) || JSON.stringify(template.embed)
+const commitFilters = core.getMultilineInput("commit-filters").map(x => new RegExp(x))
 
 const DATA = {
   env: { ...process.env },
@@ -23,6 +22,14 @@ github.context.payload.commits ??= defaultPayload
 
 if (lastCommitOnly) {
   github.context.payload.commits = github.context.payload.commits.slice(-1)
+}
+
+if (commitFilters.length !== 0) {
+  console.log(`Filters: ${commitFilters}`)
+  github.context.payload.commits = github.context.payload.commits.filter(commit => {
+    const messageSubject = commit.message.split('\n')[0];
+    return commitFilters.some(x => x.test(messageSubject))
+  })
 }
 
 let embeds = github.context.payload.commits.map(commit => {
