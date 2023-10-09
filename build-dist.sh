@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-ncc build discord-commits/index.mjs --license licenses.txt
+ncc build discord-commits/index.js --license licenses.txt
