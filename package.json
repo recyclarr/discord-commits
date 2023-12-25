@@ -2,10 +2,10 @@
   "name": "discord-commits",
   "version": "1.0.0",
   "description": "A github action that nicely displays multiple commits in discord based on templates.",
-  "main": "dist/index.js",
+  "main": "dist/index.mjs",
   "type": "module",
   "scripts": {
-    "build": "ncc build discord-commits/index.js --license licenses.txt",
+    "build": "ncc build discord-commits/index.mjs --license licenses.txt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
