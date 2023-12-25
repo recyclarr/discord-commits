@@ -27,5 +27,5 @@
     "node-fetch": "^3.3.0",
     "stjs": "^0.0.5"
   },
-  "packageManager": "yarn@2.4.3"
+  "packageManager": "yarn@4.0.2"
 }
